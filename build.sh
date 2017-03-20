@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t kingsylin/svn-nginx:1.0-alpine .
+docker build -t kingsylin/svn-tomcat7:1.0-alpine .
