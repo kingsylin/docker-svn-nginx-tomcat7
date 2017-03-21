@@ -1,14 +1,18 @@
-FROM java:openjdk-7-jre-alpine
+FROM alpine:latest
 MAINTAINER kingsy <kingsylin@vip.qq.com>
 
 ENV TOMCAT_MAJOR_VERSION 7
 ENV TOMCAT_MINOR_VERSION 7.0.76
 
-RUN apk update && apk add wget bash subversion unzip
+RUN apk update && apk add openjdk7 wget bash subversion unzip
 
-RUN wget http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_MINOR_VERSION}/bin/apache-tomcat-${TOMCAT_MINOR_VERSION}.zip >/dev/null 2>&1
+WORKDIR /work
 
-RUN wget http://apache.mesi.com.ar/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip  >/dev/null 2>&1
+RUN wget http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_MINOR_VERSION}/bin/apache-tomcat-${TOMCAT_MINOR_VERSION}.zip >/dev/null 2>&1\
+     && unzip apache-tomcat*.zip && rm -f apache-tomcat*.zip && mv apache-tomcat* tomcat
+
+RUN wget http://apache.mesi.com.ar/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip >/dev/null 2>&1\
+    && unzip apache-maven*.zip && rm -f apache-maven*.zip && mv apache-maven* maven
 
 COPY ./docker-entrypoint.sh /
 
