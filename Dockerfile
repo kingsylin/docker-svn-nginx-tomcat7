@@ -6,6 +6,8 @@ ENV TOMCAT_MINOR_VERSION 7.0.76
 
 RUN apk update && apk add openjdk7 wget bash subversion unzip
 
+RUN sed -i 's/\/dev\/urandom/\/dev\/.\/urandom/g' /usr/lib/jvm/java-1.7-openjdk/jre/lib/security/java.security
+
 WORKDIR /work
 
 RUN wget http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_MINOR_VERSION}/bin/apache-tomcat-${TOMCAT_MINOR_VERSION}.zip >/dev/null 2>&1\
