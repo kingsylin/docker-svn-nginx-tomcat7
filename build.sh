@@ -1,2 +1,7 @@
 #!/bin/bash
-docker build -t kingsylin/svn-tomcat7 -t kingsylin/svn-tomcat7:1.1-alpine .
+set -x
+repo="kingsylin/svn-tomcat7"
+version="1.1-alpine"
+docker build -t ${repo} -t ${repo}:${version} .
+docker push ${repo}
+docker push ${repo}:${version}
