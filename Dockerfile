@@ -16,6 +16,10 @@ RUN wget http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-${TOMCAT_MAJOR
 RUN wget http://apache.mesi.com.ar/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip >/dev/null 2>&1\
     && unzip apache-maven*.zip && rm -f apache-maven*.zip && mv apache-maven* maven
 
+COPY ./fonts/* /usr/share/fonts/win/
+
+RUN fc-cache
+
 COPY ./settings.xml /root/.m2/
 
 COPY ./docker-entrypoint.sh /
